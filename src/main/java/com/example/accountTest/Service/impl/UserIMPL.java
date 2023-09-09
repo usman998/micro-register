@@ -1,6 +1,5 @@
 package com.example.accountTest.Service.impl;
 import com.example.accountTest.Dto.UserDTO;
-import com.example.accountTest.Dto.LoginDTO;
 import com.example.accountTest.Entity.User;
 import com.example.accountTest.Repo.UserRepo;
 import com.example.accountTest.Service.UserService;
@@ -9,7 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
-import java.util.Optional;
+
+import java.util.Objects;
 
 @Service
 public class UserIMPL implements UserService{
@@ -31,10 +31,9 @@ public class UserIMPL implements UserService{
                     userDTO.getLastName(),
                     userDTO.getAddress(),
                     userDTO.getEmail(),
-                    this.passwordEncoder.encode(userDTO.getPassword())
+                    Objects.isNull(this.passwordEncoder)?userDTO.getPassword():this.passwordEncoder.encode(userDTO.getPassword())
             );
-            var s = userRepo.save(user);
-            System.out.println("======> "+s);
+            User s = userRepo.save(user);
             User user2 = userRepo.findByEmail(userDTO.getEmail());
             return new UserResponse(
                     "Success",

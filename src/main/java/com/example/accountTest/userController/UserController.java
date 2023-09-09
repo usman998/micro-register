@@ -1,6 +1,5 @@
 package com.example.accountTest.userController;
 import com.example.accountTest.Dto.UserDTO;
-import com.example.accountTest.Dto.LoginDTO;
 import com.example.accountTest.Service.UserService;
 import com.example.accountTest.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
